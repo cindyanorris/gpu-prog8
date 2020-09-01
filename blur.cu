@@ -173,8 +173,8 @@ void writeJPGImage(char * filename, unsigned char * Pout,
 
    cinfo.image_width = width;    /* image width and height, in pixels */
    cinfo.image_height = height;
-   cinfo.input_components = 1;   /* # of color components per pixel */
-   cinfo.in_color_space = JCS_GRAYSCALE;
+   cinfo.input_components = CHANNELS;   /* # of color components per pixel */
+   cinfo.in_color_space = JCS_RGB;
    jpeg_set_defaults(&cinfo);
    jpeg_set_quality(&cinfo, 75, TRUE);
 
@@ -183,7 +183,7 @@ void writeJPGImage(char * filename, unsigned char * Pout,
 
    while (cinfo.next_scanline < cinfo.image_height)
    {
-      rowPointer[0] = &Pout[cinfo.next_scanline * width];
+      rowPointer[0] = &Pout[cinfo.next_scanline * width * CHANNELS];
       (void) jpeg_write_scanlines(&cinfo, rowPointer, 1);
    }
    jpeg_finish_compress(&cinfo);

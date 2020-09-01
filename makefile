@@ -30,4 +30,4 @@ generate: generate.c
 	gcc -O2 generate.c -ljpeg -o generate
 
 clean:
-	rm generate blur *.o
+	rm generate blur *.o h_blur*.jpg d_blur*.jpg
